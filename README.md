@@ -50,8 +50,8 @@ cp .env.example .env
   - `docker compose exec laravel.test vendor/bin/phpstan analyze`
 - **Стиль кода:** Используется **Laravel Pint**. Автоматически добавляется `declare(strict_types=1)`.
   - `docker compose exec laravel.test vendor/bin/pint`
-- **Frontend:** **Tailwind CSS 4.0** (Vite).
-  - `docker compose exec laravel.test npm run dev`
+- **Frontend:** **Tailwind CSS 4.0** (CDN).
+  
 
 ---
 
