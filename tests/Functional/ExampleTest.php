@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Functional;
 
-use Codeception\Test\Functional;
+use Codeception\Test\Unit;
 
-class ExampleTest extends Functional
+class ExampleTest extends Unit
 {
     public function test_example(): void
     {
