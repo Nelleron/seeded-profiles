@@ -11,7 +11,7 @@ suites:
     Unit:
         enabled: true
     Functional:
-        enabled: false
+        enabled: true
     Acceptance:
         enabled: false
 extensions:
