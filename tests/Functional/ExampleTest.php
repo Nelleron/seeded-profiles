@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Tests\Functional;
 
-use Codeception\Test\Unit as CodeceptionUnit;
+use Codeception\Test\Unit;
 
-class ExampleTest extends CodeceptionUnit
+class ExampleTest extends Unit
 {
     public function test_example(): void
     {
