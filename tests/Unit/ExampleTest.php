@@ -8,7 +8,7 @@ use Codeception\Test\Unit;
 
 class ExampleTest extends Unit
 {
-    public function testExample(): void
+    public function test_example(): void
     {
         $this->assertTrue(true);
     }
