@@ -13,7 +13,7 @@ suites:
     Functional:
         enabled: true
     Acceptance:
-        enabled: false
+        enabled: true
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
