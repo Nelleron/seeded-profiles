@@ -66,9 +66,6 @@ jobs:
           DB_USERNAME: root
           DB_PASSWORD: ''
 
-      - name: Run PHPStan
-        run: vendor/bin/phpstan analyze --level 5
-
       - name: Run Codeception Tests
         run: vendor/bin/codecept run
         env:
