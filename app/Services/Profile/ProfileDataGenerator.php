@@ -58,10 +58,10 @@ class ProfileDataGenerator
     /**
      * Проверить валидность возраста для сидирования.
      *
-     * @param  Carbon  $birthDate  Дата рождения
+     * @param  \Carbon\CarbonInterface  $birthDate  Дата рождения
      * @return bool true если возраст в диапазоне 22-34
      */
-    public function isValidAge(Carbon $birthDate): bool
+    public function isValidAge(\Carbon\CarbonInterface $birthDate): bool
     {
         $age = (int) $birthDate->diffInYears(now());
 

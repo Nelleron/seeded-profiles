@@ -42,11 +42,7 @@ services:
         networks:
             - sail
         healthcheck:
-            test:
-                - CMD
-                - healthcheck.sh
-                - '--connect'
-                - '--innodb_initialized'
+            test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
             retries: 3
             timeout: 5s
     minio:
@@ -63,11 +59,7 @@ services:
             - sail
         command: 'minio server /data/main --console-address ":8900"'
         healthcheck:
-            test:
-                - CMD
-                - curl
-                - '-f'
-                - 'http://localhost:9000/minio/health/live'
+            test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
             retries: 3
             timeout: 5s
     createbuckets:
