@@ -1,64 +1,80 @@
-# Laravel Project (Dockerized Setup)
+# 🚀 Laravel AI Seeding Project
 
-Этот проект настроен для быстрой работы через Docker с использованием Laravel Sail. Все необходимые зависимости (PHP 8.4, MariaDB, Redis, MinIO, Mailpit) уже включены в конфигурацию.
+Проект для автоматической генерации уникальных профилей пользователей с использованием AI-фотографий (HuggingFace API) и умного сидинга приглашений.
 
-## 🚀 Быстрый старт (Deployment)
+## 🛠 Быстрый старт (Deployment)
 
-Проект полностью контейнеризирован и автономен. Его можно запустить любым удобным способом:
-
-### Способ А: Через стандартный Docker Compose (Рекомендуется)
-Этот способ работает даже если у вас **не установлены** PHP и Composer локально. Все конфигурации (Dockerfile, скрипты БД) вынесены в папку `docker/`.
+Проект полностью контейнеризирован (**PHP 8.4, MariaDB, MinIO**).
 
 ```bash
+# 1. Подготовка окружения
 cp .env.example .env
+
+# 2. Запуск контейнеров
 docker compose up -d --build
+
+# 3. Установка зависимостей и настройка
 docker compose exec laravel.test composer install
 docker compose exec laravel.test php artisan key:generate
 docker compose exec laravel.test php artisan migrate
+
+# 4. Базовое наполнение (Города и Типы приглашений)
+docker compose exec laravel.test php artisan db:seed --class=CitySeeder
+docker compose exec laravel.test php artisan db:seed --class=InvitationTypeSeeder
 ```
 
-### Способ Б: Через Laravel Sail
-Если вы предпочитаете использовать стандартный воркфлоу Laravel:
+---
+
+##  Artisan-команда для генерации фейковых профилей (Seeding)
+
+Главная фича проекта — команда для генерации "живых" профилей. Она создает пользователей, заполняет их профили уникальными именами и био, назначает циклические типы приглашений и генерирует реальные фото через AI.
 
 ```bash
-cp .env.example .env
-./vendor/bin/sail up -d --build
-./vendor/bin/sail artisan key:generate
-./vendor/bin/sail artisan migrate
+docker compose exec laravel.test php artisan seed:invitations {--city=ID} {--count=10}
 ```
 
-*Примечание: Флаг `--build` обязателен только при первом запуске.*
+---
+
+##  Настройка AI (HuggingFace)
+
+Для работы генерации фото необходимо получить бесплатный токен на [huggingface.co](https://huggingface.co/settings/tokens) и добавить его в `.env`:
+
+```env
+HUGGINGFACE_API_KEY=your_token_here
+```
+
+### Расширенные настройки
+Вы можете настроить параметры генерации в `.env` файле:
+- `HUGGINGFACE_MODEL`: Используемая модель (по умолчанию Stable Diffusion 3 Medium).
+- `HUGGINGFACE_IMAGE_WIDTH` / `HEIGHT`: Размер генерируемых фото (по умолчанию 256x256).
+- `HUGGINGFACE_NEGATIVE_PROMPT`: Исключаемые объекты на фото (качество, артефакты).
+
+Фотографии сохраняются в **MinIO** по пути `users/{user_id}/photos/`.
 
 ---
 
-## 🛠 Доступные сервисы
+## ✅ Тестирование и Качество
 
-После успешного запуска проект будет доступен по следующим адресам:
+Мы используем **Codeception 5** для обеспечения надежности.
 
-- **Приложение:** [http://localhost](http://localhost)
-- **Почта (Mailpit):** [http://localhost:8025](http://localhost:8025) (интерфейс для просмотра исходящих писем)
-- **Хранилище (MinIO):** [http://localhost:8900](http://localhost:8900) (логин: `sail`, пароль: `password`)
-- **База данных (MariaDB):** `localhost:3306` (тестовая БД: `laravel_test`)
+### Запуск тестов:
+```bash
+# Все тесты (Unit + Functional)
+docker compose exec laravel.test vendor/bin/codecept run --steps
 
----
+# Только функциональные (проверка Artisan команды и БД)
+docker compose exec laravel.test vendor/bin/codecept run Functional
+```
 
-## ✅ Качество и тестирование
-
-- **Тестирование:** Используется **Codeception 5** (Unit, Functional). Тесты запускаются на MariaDB (`laravel_test`).
-  - `docker compose exec laravel.test vendor/bin/codecept run`
-- **Статический анализ:** Используется **PHPStan (Larastan)** на 7-м уровне строгости.
-  - `docker compose exec laravel.test vendor/bin/phpstan analyze`
-- **Стиль кода:** Используется **Laravel Pint**. Автоматически добавляется `declare(strict_types=1)`.
-  - `docker compose exec laravel.test vendor/bin/pint`
-- **Frontend:** **Tailwind CSS 4.0** (CDN).
-  
+### Стандарты:
+- **PHPStan**: Строгий анализ кода (уровень 5) с использованием Larastan.
+- **Laravel Pint**: Единообразный стиль кода + `strict_types`.
+- **Локализация**: Тесты и сообщения в консоли полностью на русском языке.
 
 ---
 
-## Технологический стек
-- **PHP 8.4**
-- **Laravel 12**
+## 🏗 Технологический стек
+- **PHP 8.4** & **Laravel 12**
 - **MariaDB 11** (База данных)
-- **Redis** (Кэш и сессии)
-- **MinIO** (S3-совместимое хранилище)
-- **Mailpit** (Отладка почты)
+- **MinIO** (S3-хранилище для фото)
+- **HuggingFace API** (AI генерация изображений)
