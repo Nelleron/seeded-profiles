@@ -6,4 +6,11 @@ actor: UnitTester
 modules:
     enabled:
         - Asserts
+        - Laravel:
+            environment_file: .env.testing
+            cleanup: true
+            run_database_migrations: false
+            disable_middleware: true
+            disable_events: true
+            disable_model_events: true
 step_decorators: ~

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Codeception\Test\Unit as CodeceptionUnit;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-abstract class TestCase extends BaseTestCase
+abstract class TestCase extends CodeceptionUnit
 {
-    //
+    use DatabaseTransactions;
 }

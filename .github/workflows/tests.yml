@@ -50,6 +50,9 @@ jobs:
       - name: Run Pint (Code Style)
         run: vendor/bin/pint --test
 
+      - name: Run PHPStan (Static Analysis)
+        run: vendor/bin/phpstan analyze --memory-limit=2G
+
       - name: Copy environment file
         run: cp .env.example .env
 

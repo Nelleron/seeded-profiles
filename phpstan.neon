@@ -1,7 +1,22 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
 parameters:
-    level: 5
+
     paths:
         - app/
         - database/
         - routes/
         - tests/
+
+    excludePaths:
+        - tests/Support/_generated/*
+
+    # Level 9 is the highest level
+    level: 5
+
+#    ignoreErrors:
+#        - '#PHPDoc tag @var for variable \$user contains unresolvable type#'
+#
+#    excludePaths:
+#        - ./*/*/FileToBeExcluded.php
