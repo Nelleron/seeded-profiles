@@ -18,6 +18,12 @@ class SeedingUniquenessCest
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
 
+        // Очищаем таблицы перед каждым тестом
+        DB::table('user_photos')->truncate();
+        DB::table('invitations')->truncate();
+        DB::table('user_profiles')->truncate();
+        DB::table('users')->truncate();
+
         // Подготовка данных через сидеры
         Artisan::call('db:seed', ['--class' => 'CitySeeder']);
         Artisan::call('db:seed', ['--class' => 'InvitationTypeSeeder']);

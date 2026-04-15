@@ -21,6 +21,12 @@ class SeedInvitationsCest
         // Отключаем FK для возможности ручного указания ID городов в тестах
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
 
+        // Очищаем таблицы перед каждым тестом
+        DB::table('user_photos')->truncate();
+        DB::table('invitations')->truncate();
+        DB::table('user_profiles')->truncate();
+        DB::table('users')->truncate();
+
         // Используем сидеры для подготовки данных
         Artisan::call('db:seed', ['--class' => 'CitySeeder']);
         Artisan::call('db:seed', ['--class' => 'InvitationTypeSeeder']);
