@@ -1,7 +1,22 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
 parameters:
-    level: 5
+
     paths:
         - app/
         - database/
         - routes/
         - tests/
+
+    excludePaths:
+        - tests/Support/_generated/*
+        - tests/Support/AcceptanceTester.php
+        - tests/Support/FunctionalTester.php
+        - tests/Support/UnitTester.php
+
+    scanFiles:
+        - stubs/FunctionalTester.php
+
+    # Level 9 is the highest level
+    level: 5

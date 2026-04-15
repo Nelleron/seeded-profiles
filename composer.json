@@ -1,5 +1,4 @@
 {
-    "$schema": "https://getcomposer.org/schema.json",
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
@@ -11,9 +10,11 @@
     "require": {
         "php": "^8.4",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^3.0"
+        "laravel/tinker": "^3.0",
+        "league/flysystem-aws-s3-v3": "^3.32"
     },
     "require-dev": {
+        "aws/aws-sdk-php": "^3.379",
         "codeception/codeception": "^5.3",
         "codeception/module-asserts": "^3.3",
         "codeception/module-db": "^3.2",

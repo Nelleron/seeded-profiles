@@ -1,12 +1,11 @@
 actor: FunctionalTester
 modules:
     enabled:
-        - Laravel:
+        - Laravel
+        - Asserts
+    config:
+        Laravel:
             environment_file: .env.testing
             cleanup: true
-        - Asserts
-        - Db:
-            dsn: 'mysql:host=mariadb;dbname=laravel_test'
-            user: 'sail'
-            password: 'password'
-            cleanup: false
+            run_database_migrations: true
+step_decorators: ~
