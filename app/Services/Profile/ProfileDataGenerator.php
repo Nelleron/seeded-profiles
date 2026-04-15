@@ -6,6 +6,7 @@ namespace App\Services\Profile;
 
 use App\Enums\Gender;
 use Carbon\Carbon;
+use Carbon\CarbonInterface;
 
 /**
  * Генератор данных профиля для сидирования.
@@ -58,10 +59,10 @@ class ProfileDataGenerator
     /**
      * Проверить валидность возраста для сидирования.
      *
-     * @param  \Carbon\CarbonInterface  $birthDate  Дата рождения
+     * @param  CarbonInterface  $birthDate  Дата рождения
      * @return bool true если возраст в диапазоне 22-34
      */
-    public function isValidAge(\Carbon\CarbonInterface $birthDate): bool
+    public function isValidAge(CarbonInterface $birthDate): bool
     {
         $age = (int) $birthDate->diffInYears(now());
 
