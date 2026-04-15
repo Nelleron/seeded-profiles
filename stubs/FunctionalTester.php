@@ -34,6 +34,4 @@ use Codeception\Actor;
  * @method void assertEmpty($value, $message = '')
  * @method void assertNotEmpty($value, $message = '')
  */
-class FunctionalTester extends Actor
-{
-}
+class FunctionalTester extends Actor {}
