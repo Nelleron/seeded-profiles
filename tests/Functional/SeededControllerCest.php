@@ -169,6 +169,8 @@ class SeededControllerCest
     {
         $I->wantTo('проверить 404 для несуществующего аватара');
 
+        Storage::fake('s3');
+
         $I->amOnPage('/storage/avatars/nonexistent/path.jpg');
         $I->seeResponseCodeIs(404);
     }
