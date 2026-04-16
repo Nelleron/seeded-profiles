@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Seeded\SeedProfileDestroyByCityRequest;
 use App\Http\Requests\Seeded\SeedProfileIndexRequest;
 use App\Http\Resources\Seeded\SeedProfileResource;
+use App\Models\City;
 use App\Models\Invitation;
 use App\Models\User;
 use App\Models\UserPhoto;
@@ -31,7 +32,7 @@ class SeededController extends Controller
         }
 
         $profiles = $query->orderByDesc('created_at')->get();
-        $cities = \App\Models\City::whereHas('profiles', fn ($q) => $q->whereHas('user', fn ($u) => $u->where('is_seeded', true)))
+        $cities = City::whereHas('profiles', fn ($q) => $q->whereHas('user', fn ($u) => $u->where('is_seeded', true)))
             ->orderBy('name')
             ->pluck('name', 'id');
 
