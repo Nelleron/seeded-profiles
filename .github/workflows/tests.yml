@@ -75,6 +75,10 @@ jobs:
           APP_NAME=Laravel
           APP_ENV=testing
           APP_DEBUG=true
+          APP_URL=http://localhost
+          APP_LOCALE=ru
+          APP_FALLBACK_LOCALE=en
+          APP_FAKER_LOCALE=ru_RU
           DB_CONNECTION=mariadb
           DB_HOST=127.0.0.1
           DB_PORT=3306
@@ -84,12 +88,12 @@ jobs:
           SESSION_DRIVER=array
           CACHE_STORE=array
           QUEUE_CONNECTION=sync
+          MAIL_MAILER=array
+          FILESYSTEM_DISK=local
+          AWS_ACCESS_KEY_ID=test
+          AWS_SECRET_ACCESS_KEY=test
+          AWS_DEFAULT_REGION=us-east-1
+          AWS_BUCKET=test
           EOF
+          grep APP_KEY .env >> .env.testing
           vendor/bin/codecept run
-        env:
-          DB_CONNECTION: mariadb
-          DB_HOST: 127.0.0.1
-          DB_PORT: 3306
-          DB_DATABASE: laravel_test
-          DB_USERNAME: root
-          DB_PASSWORD: ''
