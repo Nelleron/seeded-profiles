@@ -6,6 +6,6 @@ modules:
     config:
         Laravel:
             environment_file: .env.testing
-            cleanup: true
+            cleanup: false
             run_database_migrations: true
 step_decorators: ~

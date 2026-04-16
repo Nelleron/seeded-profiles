@@ -33,5 +33,13 @@ use Codeception\Actor;
  * @method void assertStringContainsString($needle, $haystack, $message = '')
  * @method void assertEmpty($value, $message = '')
  * @method void assertNotEmpty($value, $message = '')
+ *
+ * Browser methods (from Laravel module)
+ * @method void amOnPage(string $page)
+ * @method void amOnRoute(string $route, array $params = [])
+ * @method void amOnUrl(string $url)
+ * @method void see(string $text, string $selector = null)
+ * @method void dontSee(string $text, string $selector = null)
+ * @method void seeResponseCodeIs(int $code)
  */
 class FunctionalTester extends Actor {}

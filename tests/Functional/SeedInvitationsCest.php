@@ -41,6 +41,13 @@ class SeedInvitationsCest
 
     public function _after(FunctionalTester $I)
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        DB::table('user_photos')->truncate();
+        DB::table('invitations')->truncate();
+        DB::table('user_profiles')->truncate();
+        DB::table('users')->truncate();
+
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
         Mockery::close();
     }

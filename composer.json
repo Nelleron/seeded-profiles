@@ -20,6 +20,7 @@
         "codeception/module-db": "^3.2",
         "codeception/module-laravel": "^3.2",
         "codeception/module-phpbrowser": "*",
+        "codeception/module-rest": "^3.4",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^3.9",
         "laravel/pail": "^1.2.5",
