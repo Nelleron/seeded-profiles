@@ -74,7 +74,6 @@ jobs:
           cat > .env.testing << 'EOF'
           APP_NAME=Laravel
           APP_ENV=testing
-          APP_KEY=base64:9mwZixOCN3TkHM3hZkmGt0/Gr6e+r84Oja0VZSs4qQs=
           APP_DEBUG=true
           APP_URL=http://localhost
           APP_LOCALE=ru
@@ -91,5 +90,9 @@ jobs:
           QUEUE_CONNECTION=sync
           MAIL_MAILER=array
           FILESYSTEM_DISK=local
+          AWS_ACCESS_KEY_ID=test
+          AWS_SECRET_ACCESS_KEY=test
+          AWS_DEFAULT_REGION=us-east-1
+          AWS_BUCKET=test
           EOF
           vendor/bin/codecept run

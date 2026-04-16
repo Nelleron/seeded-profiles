@@ -106,6 +106,8 @@ class SeededControllerCest
     {
         $I->wantTo('проверить удаление всех сидированных данных');
 
+        Storage::fake('s3');
+
         $user1 = $this->createSeededProfile(1, $this->cityId);
         $user2 = $this->createSeededProfile(2, $this->cityId);
 
@@ -134,6 +136,8 @@ class SeededControllerCest
     public function testDestroyByCityDeletesOnlyCityData(FunctionalTester $I)
     {
         $I->wantTo('проверить удаление данных по конкретному городу');
+
+        Storage::fake('s3');
 
         $user1 = $this->createSeededProfile(1, $this->cityId);
         $user2 = $this->createSeededProfile(2, 2);
