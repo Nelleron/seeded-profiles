@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Seeded\SeedProfileDestroyByCityRequest;
 use App\Http\Requests\Seeded\SeedProfileIndexRequest;
-use App\Http\Resources\Seeded\SeedProfileResource;
 use App\Models\City;
 use App\Models\Invitation;
 use App\Models\User;
@@ -14,7 +13,6 @@ use App\Models\UserPhoto;
 use App\Models\UserProfile;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -38,7 +36,7 @@ class SeededController extends Controller
 
         return view('seeded', compact('profiles', 'cities'));
     }
-    
+
     public function destroyAll(): JsonResponse|RedirectResponse
     {
         $seededUsers = User::where('is_seeded', true)
