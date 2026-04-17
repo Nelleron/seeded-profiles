@@ -38,21 +38,7 @@ class SeededController extends Controller
 
         return view('seeded', compact('profiles', 'cities'));
     }
-
-    public function indexApi(SeedProfileIndexRequest $request): AnonymousResourceCollection
-    {
-        $query = UserProfile::with(['user', 'city', 'user.photos'])
-            ->whereHas('user', fn ($q) => $q->where('is_seeded', true));
-
-        if ($request->filled('city_id')) {
-            $query->where('city_id', (int) $request->city_id);
-        }
-
-        $profiles = $query->orderByDesc('created_at')->get();
-
-        return SeedProfileResource::collection($profiles);
-    }
-
+    
     public function destroyAll(): JsonResponse|RedirectResponse
     {
         $seededUsers = User::where('is_seeded', true)
