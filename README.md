@@ -30,7 +30,7 @@ docker compose exec laravel.test php artisan db:seed --class=InvitationTypeSeede
 Команда для генерации "живых" профилей. Она создает пользователей, заполняет их профили уникальными именами и био, назначает циклические типы приглашений и генерирует реальные фото через AI.
 
 ```bash
-docker compose exec laravel.test php artisan seed:invitations {--city=ID} {--count=10}
+docker compose exec laravel.test php artisan seed:invitations --city=ID --count=10
 ```
 
 ---
